@@ -203,6 +203,7 @@ if st.button("최적 지하철 찾기", type="primary", use_container_width=True
                 <div style="
                     display: inline-block;
                     background-color: #fca21b;
+                    font-family: Arial, sans-serif;
                     color: white;
                     font-size: 3.2rem;
                     font-weight: 900;
