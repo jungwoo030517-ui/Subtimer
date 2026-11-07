@@ -202,7 +202,7 @@ if st.button("최적 지하철 찾기", type="primary", use_container_width=True
                 </div>
                 <div style="
                     display: inline-block;
-                    background-color: #fca625;
+                    background-color: #fca21b;
                     color: white;
                     font-size: 3.2rem;
                     font-weight: 900;
