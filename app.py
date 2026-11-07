@@ -23,11 +23,15 @@ st.markdown("""
         font-weight: bold !important;
     }
     
-    /* 🔒 1-1. 시간 선택창 클릭 시 키보드/텍스트 입력 방지 (읽기 전용 모드) */
+   /* 🔒 1-1. 키보드 입력은 막되, 박스 전체 클릭 시 드롭다운이 바로 열리도록 설정 */
     div[data-testid="stSelectbox"] input {
-        pointer-events: none !important;
-        caret-color: transparent !important;
-        user-select: none !important;
+        cursor: pointer !important;          /* 마우스/손가락 포인터 유지 */
+        caret-color: transparent !important; /* 텍스트 커서 깜빡임 제거 */
+    }
+
+    /* 클릭 감지 레이어를 상자 전체로 확장 */
+    div[data-testid="stSelectbox"] div[role="combobox"] {
+        cursor: pointer !important;
     }
 
     /* 2. 클릭했을 때 열리는 선택 목록(드롭다운 메뉴) 글자 크기 */
