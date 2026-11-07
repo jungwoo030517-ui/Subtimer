@@ -4,7 +4,7 @@ import streamlit as st
 from datetime import datetime, timedelta
 
 # --- Streamlit 웹 UI 및 스타일 설정 ---
-st.set_page_config(page_title="노포 환승 타이머", page_icon="🚇")
+st.set_page_config(page_title="지하철 언제 타야할 지 알려드림", page_icon="🚇")
 
 # 🎨 UI 글자 및 숫자 크기 지정을 위한 Custom CSS (강제 적용 버전)
 st.markdown("""
@@ -140,18 +140,18 @@ try:
     bus_times = get_bus_times('1144.xlsx')
     st.write(f"**서면 ➔ 노포 지하철 소요시간**: {travel_time.seconds // 60}분 {travel_time.seconds % 60}초")
 except Exception as e:
-    st.error("기본 데이터(run time.csv 또는 1144.xlsx)를 불러오는 데 실패했어.")
+    st.error("기본 데이터(run time.csv 또는 1144.xlsx)를 불러오는 데 실패했습니다.")
     st.stop()
 
 # session_state 초기화
 if "target_bus" not in st.session_state:
     st.session_state.target_bus = bus_times[0]
 
-day_type = st.radio("요일을 선택해", ["평일", "토요일", "공휴일"], horizontal=True)
+day_type = st.radio("요일을 선택하세요.", ["평일", "토요일", "공휴일"], horizontal=True)
 subway_times = get_subway_times(day_type)
 
 # 🕒 현재 시각 기준 가장 빠른 버스 찾기 버튼
-if st.button("🕒 지금 시각 기준 가장 빠른 버스 맞추기", use_container_width=True):
+if st.button("🕒 지금 시각 기준으로", use_container_width=True):
     now = datetime.now()
     estimated_arrival = now + travel_time + timedelta(minutes=3)
     
@@ -165,9 +165,9 @@ if st.button("🕒 지금 시각 기준 가장 빠른 버스 맞추기", use_con
             
     if next_bus:
         st.session_state.target_bus = next_bus
-        st.toast(f"현재 시각({now.strftime('%H:%M')}) 기준 탑승 가능한 {next_bus} 버스로 맞췄어!", icon="⏱️")
+        st.toast(f"현재 시각({now.strftime('%H:%M')}) 기준 탑승 가능한 {next_bus} 버스로 맞췄어요!", icon="⏱️")
     else:
-        st.warning("오늘 운행하는 남은 버스가 없어!")
+        st.warning("오늘 운행하는 남은 버스가 없습니다...!")
 
 col1, col2 = st.columns(2)
 with col1:
@@ -190,7 +190,7 @@ with col2:
         format="%d분"
     )
 
-if st.button("최적 지하철 찾기", type="primary", use_container_width=True):
+if st.button("찾아보기", type="primary", use_container_width=True):
     optimal, arrive = find_optimal_subway(target_bus, subway_times, travel_time, buffer_mins)
     
     if optimal:
@@ -229,4 +229,4 @@ if st.button("최적 지하철 찾기", type="primary", use_container_width=True
         * 🚌 **버스 출발:** {target_bus} (여유시간 {buffer_mins}분)
         """)
     else:
-        st.error("❌ 이 버스를 타기 위한 지하철 다이어가 부족해. 첫차 시간 등을 확인해봐.")
+        st.error("❌ 이 버스를 타기 위한 지하철 다이어가 부족합니다. 첫차 시간 등을 확인해보세요.")
