@@ -6,44 +6,36 @@ from datetime import datetime, timedelta
 # --- Streamlit 웹 UI 및 스타일 설정 ---
 st.set_page_config(page_title="노포 환승 타이머", page_icon="🚇")
 
-# 🎨 UI 글자 및 숫자 크기 지정을 위한 Custom CSS (최신 Streamlit 대응)
+# 🎨 UI 글자 및 숫자 크기 지정을 위한 Custom CSS (강제 적용 버전)
 st.markdown("""
     <style>
-    /* 1. 시간 선택창(Selectbox) 상자 안의 텍스트/숫자 크기 (2rem으로 시원하게 확대) */
-    div[data-testid="stSelectbox"] div[role="combobox"] * {
-        font-size: 5rem !important;
+    /* 1. 시간 선택창(stSelectbox) 내부의 모든 텍스트, 숫자, 입력창 크기 강제 지정 */
+    div[data-testid="stSelectbox"] * {
+        font-size: 1.8rem !important;
         font-weight: bold !important;
-        line-height: 1.5 !important;
     }
 
-    /* 2. 클릭 시 드롭다운으로 목록 열렸을 때 항목들의 글자/숫자 크기 */
-    div[data-baseweb="popover"] ul li * {
-        font-size: 5rem !important;
+    /* 2. 클릭했을 때 열리는 선택 목록(드롭다운 메뉴) 글자 크기 */
+    div[data-baseweb="popover"] * {
+        font-size: 1.5rem !important;
     }
 
-    /* 3. "희망하는 1144번 버스 출발 시간" 라벨(제목) 글자 크기 */
+    /* 3. '희망하는 1144번 버스 출발 시간' 라벨(제목) 크기 조절 (너무 커지는 것 방지) */
     div[data-testid="stSelectbox"] label p {
+        font-size: 1.1rem !important;
+        font-weight: bold !important;
+    }
+
+    /* 4. 환승 여유 시간 슬라이더 텍스트/숫자 크기 */
+    div[data-testid="stSlider"] * {
         font-size: 1.2rem !important;
         font-weight: bold !important;
     }
 
-    /* 4. 환승 여유 시간 슬라이더 라벨 및 오른쪽 숫자 표시 크기 */
-    div[data-testid="stSlider"] label p,
-    div[data-testid="stSlider"] [data-testid="stTickBar"] * {
-        font-size: 1.2rem !important;
+    /* 5. 버튼 글자 크기 */
+    div.stButton > button * {
+        font-size: 1.15rem !important;
         font-weight: bold !important;
-    }
-    
-    /* 슬라이더 현재 값(숫자) 크기 */
-    div[data-testid="stSlider"] div[role="slider"] {
-        transform: scale(1.3); /* 슬라이더 조절 단추 크기 확대 */
-    }
-
-    /* 5. 버튼 글자 크기 및 높이 확대 */
-    div.stButton > button {
-        font-size: 1.2rem !important;
-        font-weight: bold !important;
-        padding: 0.6rem 1rem !important;
     }
     </style>
 """, unsafe_allow_html=True)
