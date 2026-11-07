@@ -22,6 +22,13 @@ st.markdown("""
         font-size: 1.5rem !important;
         font-weight: bold !important;
     }
+    
+    /* 🔒 1-1. 시간 선택창 클릭 시 키보드/텍스트 입력 방지 (읽기 전용 모드) */
+    div[data-testid="stSelectbox"] input {
+        pointer-events: none !important;
+        caret-color: transparent !important;
+        user-select: none !important;
+    }
 
     /* 2. 클릭했을 때 열리는 선택 목록(드롭다운 메뉴) 글자 크기 */
     div[data-baseweb="popover"] * {
