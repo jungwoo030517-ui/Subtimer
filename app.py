@@ -208,7 +208,7 @@ if st.button("최적 지하철 찾기", type="primary", use_container_width=True
                     font-weight: 900;
                     padding: 0.5rem 1.8rem;
                     border-radius: 12px;
-                    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+                    box-shadow: 0 6px 15px rgba(255, 119, 0, 0.4);
                     letter-spacing: 2px;
                     margin: 0.3rem 0;
                 ">
