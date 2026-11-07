@@ -23,20 +23,19 @@ st.markdown("""
         font-weight: bold !important;
     }
     
-/* 🔒 1-1. 모바일 키보드 원천 차단 & 상자 전체 100% 원터치 클릭 활성화 */
+/* 🔒 1-1. 키보드는 안 뜨게 포커스 차단 + 글자는 선명하게 유지 + 상자 전체 터치 활성화 */
     div[data-testid="stSelectbox"] input {
-        display: none !important; /* 모바일 가상 키보드를 유발하는 input 요소 자체를 완전 제거 */
+        display: block !important;           /* 글자 투명화 방지 */
+        pointer-events: none !important;      /* input에 모바일 키보드 포커스 차단 */
+        caret-color: transparent !important;  /* 커서 숨김 */
+        background: transparent !important;
     }
 
-    /* 상자 전체 및 내부 모든 영역을 100% 넓이의 손가락 터치 버튼으로 변경 */
-    div[data-testid="stSelectbox"] div[data-baseweb="select"],
-    div[data-testid="stSelectbox"] div[role="combobox"] {
+    /* 상자 전체를 터치 영역으로 만들어서 어디를 눌러도 드롭다운이 열리게 처리 */
+    div[data-testid="stSelectbox"] div[data-baseweb="select"] {
         cursor: pointer !important;
         pointer-events: auto !important;
-        user-select: none !important;
-        -webkit-user-select: none !important;
         -webkit-tap-highlight-color: transparent !important;
-        width: 100% !important;
     }
     
     /* 2. 클릭했을 때 열리는 선택 목록(드롭다운 메뉴) 글자 크기 */
