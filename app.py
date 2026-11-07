@@ -23,23 +23,22 @@ st.markdown("""
         font-weight: bold !important;
     }
     
-  /* 🔒 1-1. 모바일 가상 키보드 100% 차단 & 박스 전체 클릭 활성화 */
+/* 🔒 1-1. 모바일 키보드 원천 차단 & 상자 전체 100% 원터치 클릭 활성화 */
     div[data-testid="stSelectbox"] input {
-        pointer-events: none !important;           /* input 터치 포커스 전면 차단 */
-        -webkit-user-modify: read-only !important; /* 웹키트 브라우저 강제 읽기전용 */
-        caret-color: transparent !important;      /* 커서 숨김 */
-        user-select: none !important;
+        display: none !important; /* 모바일 가상 키보드를 유발하는 input 요소 자체를 완전 제거 */
     }
 
-    /* 박스 겉면 전체를 클릭 가능한 터치 영역으로 지정 */
-    div[data-testid="stSelectbox"] div[role="combobox"],
+    /* 상자 전체 및 내부 모든 영역을 100% 넓이의 손가락 터치 버튼으로 변경 */
     div[data-testid="stSelectbox"] div[data-baseweb="select"],
-    div[data-testid="stSelectbox"] div[data-baseweb="select"] > div {
+    div[data-testid="stSelectbox"] div[role="combobox"] {
         cursor: pointer !important;
         pointer-events: auto !important;
+        user-select: none !important;
+        -webkit-user-select: none !important;
         -webkit-tap-highlight-color: transparent !important;
+        width: 100% !important;
     }
-
+    
     /* 2. 클릭했을 때 열리는 선택 목록(드롭다운 메뉴) 글자 크기 */
     div[data-baseweb="popover"] * {
         font-size: 1.5rem !important;
