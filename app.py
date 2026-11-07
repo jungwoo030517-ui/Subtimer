@@ -194,8 +194,35 @@ if st.button("최적 지하철 찾기", type="primary", use_container_width=True
     optimal, arrive = find_optimal_subway(target_bus, subway_times, travel_time, buffer_mins)
     
     if optimal:
-        st.success(f"✅ 늦어도 **{optimal}** 열차를 타야 해!")
+        # 🎨 강조 텍스트 및 박스 스타일 지정
         st.markdown(f"""
+            <div style="text-align: center; margin-top: 1.5rem; margin-bottom: 1.5rem;">
+                <div style="font-size: 1.3rem; font-weight: bold; color: #333; margin-bottom: 0.5rem;">
+                    늦어도
+                </div>
+                <div style="
+                    display: inline-block;
+                    background-color: #007bff;
+                    color: white;
+                    font-size: 3.2rem;
+                    font-weight: 900;
+                    padding: 0.5rem 1.8rem;
+                    border-radius: 12px;
+                    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+                    letter-spacing: 2px;
+                    margin: 0.3rem 0;
+                ">
+                    {optimal}
+                </div>
+                <div style="font-size: 1.3rem; font-weight: bold; color: #333; margin-top: 0.5rem;">
+                    에 출발하는 열차에 탑승해야합니다.
+                </div>
+            </div>
+        """, unsafe_allow_html=True)
+        
+        # 하단 상세 정보
+        st.markdown(f"""
+        ---
         * 🚇 **서면역 탑승:** {optimal}
         * 🚩 **노포역 도착:** {arrive}
         * 🚌 **버스 출발:** {target_bus} (여유시간 {buffer_mins}분)
