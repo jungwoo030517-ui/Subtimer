@@ -11,14 +11,14 @@ st.markdown("""
     <style>
     /* 1. 시간 선택창(Selectbox) 상자 안의 텍스트/숫자 크기 (2rem으로 시원하게 확대) */
     div[data-testid="stSelectbox"] div[role="combobox"] * {
-        font-size: 1.8rem !important;
+        font-size: 5rem !important;
         font-weight: bold !important;
         line-height: 1.5 !important;
     }
 
     /* 2. 클릭 시 드롭다운으로 목록 열렸을 때 항목들의 글자/숫자 크기 */
     div[data-baseweb="popover"] ul li * {
-        font-size: 1.5rem !important;
+        font-size: 5rem !important;
     }
 
     /* 3. "희망하는 1144번 버스 출발 시간" 라벨(제목) 글자 크기 */
