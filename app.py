@@ -11,7 +11,7 @@ st.markdown("""
     <style>
     /* 1. 시간 선택창(stSelectbox) 내부의 모든 텍스트, 숫자, 입력창 크기 강제 지정 */
     div[data-testid="stSelectbox"] * {
-        font-size: 1.8rem !important;
+        font-size: 1.5rem !important;
         font-weight: bold !important;
     }
 
@@ -23,13 +23,13 @@ st.markdown("""
     /* 3. '희망하는 1144번 버스 출발 시간' 라벨(제목) 크기 조절 (너무 커지는 것 방지) */
     div[data-testid="stSelectbox"] label p {
         font-size: 1.1rem !important;
-        font-weight: bold !important;
+        font-weight: medium !important;
     }
 
     /* 4. 환승 여유 시간 슬라이더 텍스트/숫자 크기 */
     div[data-testid="stSlider"] * {
         font-size: 1.2rem !important;
-        font-weight: bold !important;
+        font-weight: medium !important;
     }
 
     /* 5. 버튼 글자 크기 */
