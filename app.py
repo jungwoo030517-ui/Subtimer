@@ -1,10 +1,35 @@
 #%%
 import pandas as pd
 import streamlit as st
+import streamlit.components.v1 as components  # 💡 자바스크립트 주입을 위해 추가!
 from datetime import datetime, timedelta
 
 # --- Streamlit 웹 UI 및 스타일 설정 ---
-st.set_page_config(page_title="지하철 언제 타야할 지 알려드림", page_icon="🚇")
+st.set_page_config(page_title="지하철 언제 타야하는지 알려드림", page_icon="🚇")
+
+# 🚀 1. 자바스크립트로 모바일 가상 키보드 원천 차단 (가장 확실한 방법)
+components.html(
+    """
+    <script>
+    // Streamlit 메인 화면의 HTML을 조작
+    const doc = window.parent.document;
+    
+    // 0.5초마다 시간 선택창을 감시해서 입력 기능을 완전히 잠금
+    setInterval(() => {
+        const inputs = doc.querySelectorAll('div[data-testid="stSelectbox"] input');
+        inputs.forEach(input => {
+            if (!input.hasAttribute('readonly')) {
+                input.setAttribute('readonly', 'readonly');  // 모바일 키보드 차단
+                input.setAttribute('inputmode', 'none');     // 가상 키보드 호출 방지
+                input.style.cursor = 'pointer';              // 마우스 포인터 적용
+            }
+        });
+    }, 500);
+    </script>
+    """,
+    height=0,
+    width=0,
+)
 
 # 🎨 UI 글자 및 숫자 크기 지정을 위한 Custom CSS (강제 적용 버전)
 st.markdown("""
@@ -21,25 +46,6 @@ st.markdown("""
     div[data-testid="stSelectbox"] * {
         font-size: 1.5rem !important;
         font-weight: bold !important;
-    }
-    
-/* 🔒 1-1. 모바일 가상 키보드 100% 원천 차단 (inputmode: none) & 상자 전체 100% 원터치 터치 */
-    div[data-testid="stSelectbox"] input {
-        inputmode: none !important;            /* 💡 핵심: 모바일 OS 가상 키보드 호출 완전 차단 */
-        -webkit-user-modify: read-only !important;
-        pointer-events: none !important;        /* input 포커스 감지 방지 */
-        caret-color: transparent !important;   /* 입력 커서 숨김 */
-        opacity: 1 !important;                 /* 글자 보임 유지 */
-    }
-
-    /* 셀렉트박스 겉면 전체를 클릭/터치 감지 영역으로 설정 */
-    div[data-testid="stSelectbox"] div[data-baseweb="select"],
-    div[data-testid="stSelectbox"] div[role="combobox"] {
-        cursor: pointer !important;
-        pointer-events: auto !important;
-        user-select: none !important;
-        -webkit-user-select: none !important;
-        -webkit-tap-highlight-color: transparent !important;
     }
     
     /* 2. 클릭했을 때 열리는 선택 목록(드롭다운 메뉴) 글자 크기 */
