@@ -23,15 +23,17 @@ st.markdown("""
         font-weight: bold !important;
     }
     
-   /* 🔒 1-1. 키보드 입력은 막되, 박스 전체 클릭 시 드롭다운이 바로 열리도록 설정 */
+   /* 🔒 1-1. 모바일 가상 키보드 완전 차단 & 박스 터치 시 드롭다운만 열기 */
     div[data-testid="stSelectbox"] input {
-        cursor: pointer !important;          /* 마우스/손가락 포인터 유지 */
-        caret-color: transparent !important; /* 텍스트 커서 깜빡임 제거 */
+        pointer-events: none !important;      /* input 요소 포커스 차단 (키보드 방지) */
+        -webkit-user-select: none !important; /* 텍스트 선택 방지 */
+        user-select: none !important;
     }
 
-    /* 클릭 감지 레이어를 상자 전체로 확장 */
-    div[data-testid="stSelectbox"] div[role="combobox"] {
+    /* input 대신 부모 박스 전체가 터치 클릭 이벤트를 받아 드롭다운을 열도록 설정 */
+    div[data-testid="stSelectbox"] div[data-baseweb="select"] {
         cursor: pointer !important;
+        pointer-events: auto !important;
     }
 
     /* 2. 클릭했을 때 열리는 선택 목록(드롭다운 메뉴) 글자 크기 */
