@@ -12,7 +12,7 @@ st.markdown("""
     /* 0. 메인 타이틀(st.title) 글자 크기 조절 */
     div[data-testid="stHeader"] + div h1,
     .stApp h1 {
-        font-size: 2.2rem !important;  /* 원하는 크기로 숫자를 조절 (예: 1.8rem, 2.5rem 등) */
+        font-size: 1.8rem !important;  /* 원하는 크기로 숫자를 조절 (예: 1.8rem, 2.5rem 등) */
         font-weight: 800 !important;
         padding-bottom: 0.5rem !important;
     }
