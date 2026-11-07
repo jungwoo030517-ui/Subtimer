@@ -23,18 +23,22 @@ st.markdown("""
         font-weight: bold !important;
     }
     
-/* 🔒 1-1. 키보드는 안 뜨게 포커스 차단 + 글자는 선명하게 유지 + 상자 전체 터치 활성화 */
+/* 🔒 1-1. 모바일 가상 키보드 100% 원천 차단 (inputmode: none) & 상자 전체 100% 원터치 터치 */
     div[data-testid="stSelectbox"] input {
-        display: block !important;           /* 글자 투명화 방지 */
-        pointer-events: none !important;      /* input에 모바일 키보드 포커스 차단 */
-        caret-color: transparent !important;  /* 커서 숨김 */
-        background: transparent !important;
+        inputmode: none !important;            /* 💡 핵심: 모바일 OS 가상 키보드 호출 완전 차단 */
+        -webkit-user-modify: read-only !important;
+        pointer-events: none !important;        /* input 포커스 감지 방지 */
+        caret-color: transparent !important;   /* 입력 커서 숨김 */
+        opacity: 1 !important;                 /* 글자 보임 유지 */
     }
 
-    /* 상자 전체를 터치 영역으로 만들어서 어디를 눌러도 드롭다운이 열리게 처리 */
-    div[data-testid="stSelectbox"] div[data-baseweb="select"] {
+    /* 셀렉트박스 겉면 전체를 클릭/터치 감지 영역으로 설정 */
+    div[data-testid="stSelectbox"] div[data-baseweb="select"],
+    div[data-testid="stSelectbox"] div[role="combobox"] {
         cursor: pointer !important;
         pointer-events: auto !important;
+        user-select: none !important;
+        -webkit-user-select: none !important;
         -webkit-tap-highlight-color: transparent !important;
     }
     
