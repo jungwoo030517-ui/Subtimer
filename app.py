@@ -183,9 +183,9 @@ if "target_bus" not in st.session_state:
 day_type = st.radio("요일을 선택하세요.", ["평일", "토요일", "공휴일"], horizontal=True)
 subway_times = get_subway_times(day_type)
 
-# 🕒 현재 시각 기준 가장 빠른 버스 맞추기 버튼 (한국 시각 UTC+9 적용)
+# 🕒 현재 시각 기준 가장 빠른 버스 맞추기 버튼 (한국 시각 UTC+9 적용 & 드롭다운 자동 연동)
 if st.button("🕒 지금 시각 기준 가장 빠른 버스 맞추기", use_container_width=True):
-    # 💡 서버 시각(UTC)에 9시간을 더해서 한국 시각(KST)으로 변환
+    # 서버 시각(UTC)에 9시간을 더해 한국 시각(KST)으로 변환
     now = datetime.utcnow() + timedelta(hours=9)
     estimated_arrival = now + travel_time + timedelta(minutes=3)
     
@@ -198,10 +198,13 @@ if st.button("🕒 지금 시각 기준 가장 빠른 버스 맞추기", use_con
             break
             
     if next_bus:
+        # 💡 핵심: session_state와 selectbox의 key("bus_select")를 직접 갱신
         st.session_state.target_bus = next_bus
+        st.session_state["bus_select"] = next_bus
         st.toast(f"현재 시각({now.strftime('%H:%M')}) 기준 탑승 가능한 {next_bus} 버스로 맞췄어요!", icon="⏱️")
+        st.rerun()  # 화면 즉시 새로고침해서 드롭다운 반영
     else:
-        st.warning("오늘 운행하는 남은 버스가 없습니다...!")
+        st.warning("오늘 운행하는 남은 버스가 없습니다..!")
 
 col1, col2 = st.columns(2)
 with col1:
