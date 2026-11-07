@@ -9,6 +9,14 @@ st.set_page_config(page_title="지하철 언제 타야할 지 알려드림", pag
 # 🎨 UI 글자 및 숫자 크기 지정을 위한 Custom CSS (강제 적용 버전)
 st.markdown("""
     <style>
+    /* 0. 메인 타이틀(st.title) 글자 크기 조절 */
+    div[data-testid="stHeader"] + div h1,
+    .stApp h1 {
+        font-size: 2.2rem !important;  /* 원하는 크기로 숫자를 조절 (예: 1.8rem, 2.5rem 등) */
+        font-weight: 800 !important;
+        padding-bottom: 0.5rem !important;
+    }
+    
     /* 1. 시간 선택창(stSelectbox) 내부의 모든 텍스트, 숫자, 입력창 크기 강제 지정 */
     div[data-testid="stSelectbox"] * {
         font-size: 1.5rem !important;
