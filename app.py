@@ -28,7 +28,7 @@ st.markdown("""
 
     /* 4. 환승 여유 시간 슬라이더 텍스트/숫자 크기 */
     div[data-testid="stSlider"] * {
-        font-size: 1.2rem !important;
+        font-size: 1.1rem !important;
         font-weight: medium !important;
     }
 
